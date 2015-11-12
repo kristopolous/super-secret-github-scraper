@@ -8,7 +8,7 @@ dorepo() {
   dirname=.`dirname $repo`
   [ -e $dirname ] || mkdir $dirname
   if [ -e .$repo ]; then
-    echo "skipping $dirname"
+    echo "skipping $repo"
     cd .$repo
     # git pull
     cd $cwd
@@ -30,7 +30,6 @@ gitprojects() {
   for range in daily weekly monthly; do
     for lang in bash ruby cpp css php unknown python javascript ruby bash c; do
       repo_list=`curl 'https://github.com/trending?l='$lang'&since='$range | grep -A 1 repo-list-name | grep href | awk -F \" ' { print $2 } ' ` 
-
       for repo in $repo_list; do
         dorepo $repo
       done
