@@ -27,7 +27,7 @@ gitauthors() {
   [ -e compare ] || mkdir compare
   for project in */*; do
     stat=`echo $project | tr '/' '_'`
-    if [ -d $project -a ! -s compare/$stat ]; then 
+    if [ -d $project -a ! -s $cwd/compare/$stat ]; then 
       echo $project
       cd $project
       git log --format='%aE' | sort -u | tr 'A-Z' 'a-z' > $cwd/compare/$stat
