@@ -25,17 +25,18 @@ gitprojects() {
 
 gitauthors() {
   [ -e compare ] || mkdir compare
-  for project in *; do
-    if [ -d $project -a ! -s compare/$project ]; then 
+  for project in */*; do
+    stat=`echo $project | tr '/' '_'`
+    if [ -d $project -a ! -s compare/$stat ]; then 
       echo $project
       cd $project
-      git log --format='%aE' | sort -u | tr 'A-Z' 'a-z' > ../compare/$project
+      git log --format='%aE' | sort -u | tr 'A-Z' 'a-z' > $cwd/compare/$stat
       cd $cwd
     fi
   done
 }
 
-gitprojects
+#gitprojects
 gitauthors
 cd compare
 cat * | sort | uniq -c | sort -n
