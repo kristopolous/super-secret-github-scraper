@@ -18,8 +18,8 @@ dorepo() {
 }
 
 gitsearch() {
-  for page in seq 1 100; do
-    repo_list=`curl 'https://github.com/search?o=desc&p=$page&q=stars%3A%3E1&s=stars&type=Repositories' | grep -A 1 repo-list-name | grep href | awk -F \" ' { print $2 } ' ` 
+  for page in `seq 1 100`; do
+    repo_list=`curl 'https://github.com/search?o=desc&p='$page'&q=stars%3A%3E1&s=stars&type=Repositories' | grep -A 1 repo-list-name | grep href | awk -F \" ' { print $2 } ' ` 
     for repo in $repo_list; do
       dorepo $repo
     done
