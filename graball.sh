@@ -12,7 +12,7 @@ gitprojects() {
         [ -e $dirname ] || mkdir $dirname
         if [ -e .$repo ]; then
           echo "skipping $dirname"
-          cd $repo
+          cd .$repo
           # git pull
           cd $cwd
         else
