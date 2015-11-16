@@ -10,3 +10,5 @@ a project to scrape github and find out a few things:
    * are the most active
 
 Also it would be nice to track things like library usage overtime.  For instance, when did angular or coffeescript become popular amongst the repositories or what version is most widely used.
+
+Perhaps looking for something like the most commonly included file or the largest common ngram
