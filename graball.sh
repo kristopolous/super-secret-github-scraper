@@ -19,12 +19,14 @@ dorepo() {
 
 gitsearch() {
   for page in `seq 1 99`; do
-    for lang in css Shell Objective-C cpp css php unknown python javascript ruby bash c; do
-      echo ">>> " $lang $page
-      repo_list=`curl 'https://github.com/search?l='$lang'&o=desc&p='$page'&q=stars%3A%3E1&s=stars&type=Repositories' | grep -A 1 repo-list-name | grep href | awk -F \" ' { print $2 } ' ` 
-      sleep 4
-      for repo in $repo_list; do
-        dorepo $repo
+    for type in stars forks; do
+      for lang in css Shell Objective-C cpp css php unknown python javascript ruby bash c; do
+        echo ">>> " $lang $page $type
+        repo_list=`curl 'https://github.com/search?l='$lang'&o=desc&p='$page'&q='$type'%3A%3E1&s='$type'&type=Repositories' | grep -A 1 repo-list-name | grep href | awk -F \" ' { print $2 } ' ` 
+        sleep 4
+        for repo in $repo_list; do
+          dorepo $repo
+        done
       done
     done
   done
