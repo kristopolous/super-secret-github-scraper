@@ -18,9 +18,9 @@ dorepo() {
 }
 
 gitsearch() {
-  for page in `seq 1 99`; do
+  for page in `seq 40 99`; do
     for type in stars forks; do
-      for lang in css Shell Objective-C cpp css php unknown python javascript ruby bash c; do
+      for lang in ruby bash c Shell Objective-C cpp css php unknown python javascript; do
         echo ">>> " $lang $page $type
         repo_list=`curl 'https://github.com/search?l='$lang'&o=desc&p='$page'&q='$type'%3A%3E1&s='$type'&type=Repositories' | grep -A 1 repo-list-name | grep href | awk -F \" ' { print $2 } ' ` 
         sleep 4
@@ -34,7 +34,7 @@ gitsearch() {
 
 gitprojects() {
   for range in daily weekly monthly; do
-    for lang in css Objective-C bash ruby cpp css php unknown python javascript ruby bash c; do
+    for lang in css Objective-C ruby cpp php unknown python javascript bash c; do
       echo ">>> " $lang $range
       repo_list=`curl 'https://github.com/trending?l='$lang'&since='$range | grep -A 1 repo-list-name | grep href | awk -F \" ' { print $2 } ' ` 
       for repo in $repo_list; do
