@@ -2,7 +2,9 @@
 cd ..
 self=`pwd`
 for i in */*; do
-  cd $i
-  git pull
-  cd $self
+  if [ -d $i ]; then
+    cd $i
+    git pull
+    cd $self
+  fi
 done
