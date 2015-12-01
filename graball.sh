@@ -19,7 +19,7 @@ dorepo() {
 
 gitsearch() {
  for lang in ruby bash c Shell Objective-C cpp css php unknown python javascript; do
-   for page in `seq 10 49`; do
+   for page in `seq 90 99`; do
      for type in stars forks; do
         echo ">>> " $lang $page $type
         repo_list=`curl 'https://github.com/search?l='$lang'&o=desc&p='$page'&q='$type'%3A%3E1&s='$type'&type=Repositories' | grep -A 1 repo-list-name | grep href | awk -F \" ' { print $2 } ' ` 
@@ -57,8 +57,8 @@ gitauthors() {
   done
 }
 
-#gitsearch
-gitprojects
+gitsearch
+#gitprojects
 #gitauthors
 #cd compare
 #cat * | sort | uniq -c | sort -n
