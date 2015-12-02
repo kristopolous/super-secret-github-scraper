@@ -10,7 +10,10 @@ for i in */*; do
       echo '>> Repository is supposedly gone. Skipping'
     else
       git pull
-      [ $? -eq 1 ] && touch REPOSITORY-GONE
+      if [ $? -eq 1 ]; then
+        echo 'Woops, respository seems missing. Marking this for the future.'
+        touch REPOSITORY-GONE
+      fi
     fi
 
     cd $self
