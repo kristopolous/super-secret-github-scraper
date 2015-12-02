@@ -3,11 +3,18 @@ cd ..
 self=`pwd`
 for i in */*; do
   if [ -d $i ]; then
-    echo ">> updating $i"
+    echo ">> Updating $i"
     cd $i
-    git pull
+
+    if [ -e REPOSITORY-GONE ]; then
+      echo '>> Repository is supposedly gone. Skipping'
+    else
+      git pull
+      [ $? -eq 1 ] && touch REPOSITORY-GONE
+    fi
+
     cd $self
   else
-    echo ">> skipping $i"
+    echo ">> Skipping $i"
   fi
 done
